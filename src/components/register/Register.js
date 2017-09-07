@@ -8,7 +8,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {StyleSheet} from 'react-native';
 import ImageInput from '../input/ImageInput.js';
 
-import User from '../../network/User';
+import User from '../../api/User';
 
 let {width,height} = Dimensions.get('window');
 

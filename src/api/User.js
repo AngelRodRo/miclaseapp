@@ -7,18 +7,23 @@ class User extends APIRequest{
         super();
 
         this.routes = {
-            "login":"login",
-            "register":"register"
+            "login": "login",
+            "register": "register",
+            "profile": "profile",
+            "positions": "users/positions"
         };
     }
 
-    login(email,password){
-        let data = {email,password};
-        return this.request(this.routes.login,data)
-                .then((res)=>{
-                    AsyncStorage.setItem('token', res.token);
+    login(email, password){
+        let data = { email, password };
+        return this.post(this.routes.login,data)
+                .then((res)=> {
                     return res;
                 });
+    }
+    
+    positions(){
+        return this.get(this.routes.positions);
     }
 
     register(data){
@@ -27,6 +32,10 @@ class User extends APIRequest{
                     AsyncStorage.setItem('token', res.token);
                     return res;
                 });
+    }
+
+    profile(){
+        return this.request(this.routes.profile);
     }
 }
 

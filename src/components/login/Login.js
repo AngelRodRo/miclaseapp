@@ -9,8 +9,7 @@ import {StyleSheet} from 'react-native';
 import ImageInput from '../input/ImageInput.js';
 
 
-
-import User from '../../network/User';
+import User from '../../api/User';
 
 let {width,height} = Dimensions.get('window');
 
@@ -58,6 +57,8 @@ class Login extends React.Component{
             password:"",
             visible: false
         }
+        this.user = new User();
+
         this.login = this.login.bind(this);
 
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -68,7 +69,7 @@ class Login extends React.Component{
        
         let email = this.state.email,
             password = this.state.password;
-            
+
         if(!email) return ToastAndroid.show('Por favor indique un correo antes de continuar', ToastAndroid.SHORT)
         if(!password) return ToastAndroid.show('Por favor indique una contraseña antes de continuar', ToastAndroid.SHORT);
 
@@ -77,14 +78,19 @@ class Login extends React.Component{
         });
         
         const { navigate } = this.props.navigation;
-            
-        // User.login(email,password)
-        //     .then((res)=>{
-        //         navigate('Map');
-        //     })
-        //     .catch(()=>{
-                
-        //     })
+        this.user.login(email,password)
+            .then((res)=> {
+                this.setState({
+                    visible: false
+                }); 
+
+                navigate('Map');
+            })
+            .catch(()=>{
+                this.setState({
+                    visible:false
+                }); 
+            });
     }
 
     onChangeEmail(email){
@@ -99,7 +105,7 @@ class Login extends React.Component{
         return (
             <Image source={require('./img/background.png')} style={loginStyles.backgroundImg} >
                 <Spinner visible={this.state.visible} textContent={"Cargando..."} textStyle={{color: '#FFF'}} />
-                <Image style={{width:170,height:160,marginBottom:50}} source={require('./img/logo.png')} />
+                <Image style={{width:170,height:160,marginBottom:20}} source={require('./img/logo.png')} />
 
                 <ImageInput 
                     selectionColor={"white"}

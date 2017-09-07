@@ -16,6 +16,9 @@ import {
 import HomeScreen from './src/components/home/Home';
 import LoginScreen from './src/components/login/Login';
 import RegisterScreen from './src/components/register/Register';
+import MapScreen from './src/components/map/Map';
+import ProfileScreen from './src/components/profile/Profile';
+
 
 import {
   StackNavigator
@@ -27,11 +30,14 @@ export default class MiClaseAppV1 extends Component {
       <Home/>
     );
   }
+
 }
 
 const SimpleApp = StackNavigator(
   {
-    Register: { screen: RegisterScreen }
+    Home: { screen: HomeScreen },
+    Login: { screen: LoginScreen },
+    Map: { screen: MapScreen }
   },
   { 
     headerMode: 'none' 

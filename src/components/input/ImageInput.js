@@ -14,13 +14,7 @@ var loginStyles = StyleSheet.create({
         borderColor:'white'
     },
     inputContainer:{ 
-        flexDirection:'row',
-        borderColor:'white', 
-        height:50,
-        margin:10,
-        width:width-40,
-        borderRadius:5,
-        borderWidth:1 
+        
     }
 
 })  
@@ -44,9 +38,19 @@ class ImageInput extends React.Component{
 
     render(){
         
-
+        let inputContainer={
+            flexDirection:'row',
+            borderColor:'white', 
+            height:50,
+            margin:10,
+            width:width-40,
+            borderRadius:5,
+            borderWidth:1 
+        }
+        if(this.props.height) inputContainer.height = this.props.height;
+        if(this.props.width)  inputContainer.width = this.props.width;
         return (
-            <View style={loginStyles.inputContainer}>
+            <View style={inputContainer}>
                 <Image style={{width:17,height:17,marginTop:15,marginLeft:15}} source={this.props.image} />
 
                 <TextInput
